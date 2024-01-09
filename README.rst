@@ -1,18 +1,18 @@
 .. |badge-linux-gcc| image:: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-linux-gcc.yml/badge.svg
    :target: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-linux-gcc.yml
-   :alt: CI status
+   :alt: CI Linux GCC
 
 .. |badge-macos-clang| image:: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-macos-clang.yml/badge.svg
    :target: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-macos-clang.yml
-   :alt: CI status
+   :alt: CI MACOS Clang
 
-.. |badge-linux-gcc| image:: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windws-msvc.yml/badge.svg
-   :target: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windws-msvc.yml
-   :alt: CI status
+.. |badge-windows-msvc| image:: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windows-msvc.yml/badge.svg
+   :target: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windows-msvc.yml
+   :alt: CI Windows MSVC
 
-.. |badge-linux-gcc| image:: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windws-clang-cl.yml/badge.svg
-   :target: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windws-clang-cl.yml
-   :alt: CI status
+.. |badge-windows-clang-cl| image:: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windows-clang-cl.yml/badge.svg
+   :target: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windows-clang-cl.yml
+   :alt: CI Windows Clang-CL
 
 | |badge-linux-gcc| |badge-macos-clang| |badge-windows-msvc| |badge-windows-clang-cl|
 
