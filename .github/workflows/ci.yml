@@ -72,9 +72,7 @@ jobs:
         library_type: [shared, static]
         compiler: [clang-cl, msvc]
         include:
-          - compiler: msvc
-            toolset: [14.32, 14.33, 14.34, 14.35, 14.36, 14.37]
-            
+          - compiler: msvc            
           
     env:
       CC: ${{matrix.compiler}}
@@ -100,13 +98,11 @@ jobs:
       uses: bus1/cabuild/action/msdevshell@v1
       with:
         architecture: x64
-        toolset: ${{matrix.toolset}}
     
     # make sure meson can find msvc
     - uses: TheMrMilchmann/setup-msvc-dev@v2
       with:
         arch: x64
-        toolset: ${{matrix.toolset}}
 
     - name: checkout main repository
       uses: actions/checkout@v3
