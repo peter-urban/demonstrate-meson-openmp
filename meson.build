@@ -24,14 +24,14 @@ endif
 
 # openmp
 if meson.get_compiler('cpp').get_id() == 'clang-cl'
-  libomp = meson.get_compiler('cpp').find_library('libomp')
+  # libomp = meson.get_compiler('cpp').find_library('libomp')
 
-  openmp = declare_dependency(
-    compile_args : ['/clang:-fopenmp'],
-    dependencies : [libomp]
-  )
+  # openmp = declare_dependency(
+  #   compile_args : ['/clang:-fopenmp'],
+  #   dependencies : [libomp]
+  # )
 
-  # openmp = dependency('openmp')
+  openmp = dependency('openmp')
 else
   openmp = dependency('openmp')
 endif
