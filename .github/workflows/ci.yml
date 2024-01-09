@@ -65,16 +65,12 @@ jobs:
     
 
   build-on-windows:
-    name: ci on windows (clang-cl) (${{matrix.library_type}}
+    name: ci on windows (${{matrix.compiler}}) (${{matrix.library_type}}
     strategy:
       fail-fast: false
       matrix:
         library_type: [shared, static]
-        include:
-          - toolset: vc143
-            compiler: clang-cl
-          # - toolset: msvc
-          #   compiler: sccache cl
+        compiler: [clang-cl, msvc]
             
           
     env:
@@ -91,7 +87,8 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Set up Clang
+    - if: matrix.compiler == 'clang-cl'
+      name: Set up Clang
       uses: egor-tensin/setup-clang@v1
       with:
         version: latest
@@ -100,7 +97,6 @@ jobs:
     - uses: TheMrMilchmann/setup-msvc-dev@v2
       with:
         arch: x64
-        #toolset: 14.34
 
     - name: checkout main repository
       uses: actions/checkout@v3
