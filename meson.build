@@ -20,7 +20,7 @@ demolib_compile_args = ['-Werror=unknown-pragmas']
 # openmp
 if meson.get_compiler('cpp').get_id() == 'clang-cl'
   libomp = meson.get_compiler('cpp').find_library('libomp')
-  
+
   openmp = declare_dependency(
     compile_args : ['-fopenmp'],
     dependencies : [libomp]
@@ -38,7 +38,7 @@ subdir('src')
 
 # -- tests (catch2) --
 if get_option('build_tests').enabled()
-    catch2 = subproject('catch2')
+    catch2 = subproject('catch2', default_options: ['tests=false'])
     catch2 = catch2.get_variable('catch2_with_main_dep')
 
     subdir('tests')
