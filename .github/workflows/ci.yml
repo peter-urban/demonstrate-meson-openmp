@@ -25,8 +25,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: ['ubuntu:22.04', 'ubuntu:22.10']
+        container: ['ubuntu:22.04', 'ubuntu:latest']
         library_type: ['shared', 'static']
+
+        include:
+          - container: 'ubuntu:22.04'
+            pip_command: 'pip install meson ninja'
+          - container: 'ubuntu:latest'
+            pip_command: 'pip install meson ninja --break-system-packages'
+          
     
     runs-on: ubuntu-latest
     container: ${{matrix.container}}
@@ -45,7 +52,7 @@ jobs:
       run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential pkg-config python3-pip
       
     - name: install dependencies (meson & python)
-      run: pip install meson ninja --break-system-packages
+      run: ${{matrix.pip_command}}
 
     - name: configure meson
       run: meson setup builddir/; meson configure builddir -Dprefix=/usr/ --default-library=${{matrix.library_type}}
@@ -102,16 +109,16 @@ jobs:
         lfs: false
 
     - name: install dependencies (meson & python)
-      run: pip install meson ninja
+      run: pip install meson
 
-    # - name: download ninja long path
-    #   run : |
-    #     Invoke-WebRequest -Uri https://raw.githubusercontent.com/themachinethatgoesping/tools/main/ninja-windows/ninja.exe -OutFile d:\ninja.exe
+    - name: download ninja long path
+      run : |
+        Invoke-WebRequest -Uri https://raw.githubusercontent.com/themachinethatgoesping/tools/main/ninja-windows/ninja.exe -OutFile d:\ninja.exe
 
-    # - name: check ninja executable path
-    #   run: |
-    #     $env:NINJA
-    #     d:\ninja.exe --version
+    - name: check ninja executable path
+      run: |
+        $env:NINJA
+        d:\ninja.exe --version
 
     - name: configure meson
       run: meson setup builddir/; meson configure builddir -Dprefix=/usr/ --default-library=${{matrix.library_type}}
@@ -120,9 +127,9 @@ jobs:
       run: meson compile -C builddir/
 
     - name: test (cpp)
-      run: meson test -C builddir/ --print-errorlogs 
+      #run: meson test -C builddir/ --print-errorlogs 
       # meson test does not work with the custom ninja executable
-      #run: ninja test -C builddir/ --verbose
+      run: ninja test -C builddir/ --verbose
 
 
   macos:
