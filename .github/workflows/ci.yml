@@ -75,7 +75,8 @@ jobs:
           - compiler: msvc            
           
     env:
-      CC: ${{matrix.compiler}}
+      #CC: ${{matrix.compiler}}
+      #CXX: ${{matrix.compiler}}
       #this is where we will download ninja later
       NINJA: d:/ninja.exe
 
