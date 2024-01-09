@@ -1,0 +1,77 @@
+# SPDX-FileCopyrightText: 2022 - 2024 Peter Urban, Ghent University
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: ['*-linux-gcc.yml', '*-macos-clang.yml', '*-windows-clang-cl.yml']
+    
+  pull_request:
+    branches: [ main ]
+    paths-ignore: ['*-linux-gcc.yml', '*-macos-clang.yml', '*-windows-clang-cl.yml']
+    
+
+jobs:
+  windows:
+    name: ci on windows (${{matrix.compiler}}) (${{matrix.library_type}})
+    strategy:
+      fail-fast: false
+      matrix:
+        library_type: [shared, static]
+        compiler: [msvc]           
+          
+    env:
+      #CC: ${{matrix.compiler}}
+      #CXX: ${{matrix.compiler}}
+      #this is where we will download ninja later
+      NINJA: d:/ninja.exe
+
+    runs-on: windows-latest
+
+    steps:
+    - name: setup python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+
+    - name: Prepare MSVC
+      uses: bus1/cabuild/action/msdevshell@v1
+      with:
+        architecture: x64
+    
+    # make sure meson can find msvc
+    - uses: TheMrMilchmann/setup-msvc-dev@v2
+      with:
+        arch: x64
+
+    - name: checkout main repository
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        lfs: false
+
+    - name: install dependencies (meson & python)
+      run: pip install meson
+
+    - name: download ninja long path
+      run : |
+        Invoke-WebRequest -Uri https://raw.githubusercontent.com/themachinethatgoesping/tools/main/ninja-windows/ninja.exe -OutFile d:\ninja.exe
+
+    - name: check ninja executable path
+      run: |
+        $env:NINJA
+        d:\ninja.exe --version
+
+    - name: configure meson
+      run: meson setup builddir/; meson configure builddir -Dprefix=/usr/ --default-library=${{matrix.library_type}}
+
+    - name: compile project
+      run: meson compile -C builddir/
+
+    - name: test (cpp)
+      #run: meson test -C builddir/ --print-errorlogs 
+      # meson test does not work with the custom ninja executable
+      run: ninja test -C builddir/ --verbose

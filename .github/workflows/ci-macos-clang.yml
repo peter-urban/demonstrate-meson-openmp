@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2022 - 2024 Peter Urban, Ghent University
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore: ['*-linux-gcc.yml', '*-windows-clang-cl.yml', '*-windows-msvc.yml']
+    
+  pull_request:
+    branches: [ main ]
+    paths-ignore: ['*-linux-gcc.yml', '*-windows-clang-cl.yml', '*-windows-msvc.yml']
+    
+  
+jobs:
+  macos:
+    name: ci on macOS (clang) (${{matrix.library_type}})
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        library_type: [shared, static]
+        cxx_compiler: ["$(brew --prefix llvm@16)/bin/clang++"]            
+    
+    # env does not work here because is resolved as string and not command 
+    # env:
+    #   CXX: ${{ matrix.cxx_compiler }}
+      
+    steps:
+    
+    - uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+        
+    - name: checkout main repository
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        lfs: false
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        key: super-ci-mac  # name for the cache
+        
+    # install clang 15
+    - run: brew install coreutils llvm@16
+            
+    - run: pip install meson ninja
+    
+    - name: configure meson
+      run: CXX=${{ matrix.cxx_compiler }} meson setup builddir/; meson configure builddir --default-library=${{matrix.library_type}}
+
+    - name: compile project
+      run: meson compile -C builddir/
+
+    - name: test (cpp)
+      run: meson test -C builddir/ --print-errorlogs
