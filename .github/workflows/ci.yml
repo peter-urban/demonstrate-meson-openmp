@@ -65,7 +65,7 @@ jobs:
     
 
   build-on-windows:
-    name: ci on windows (${{matrix.compiler}}) (${{matrix.library_type}}
+    name: ci on windows (${{matrix.compiler}}) (${{matrix.library_type}})
     strategy:
       fail-fast: false
       matrix:
