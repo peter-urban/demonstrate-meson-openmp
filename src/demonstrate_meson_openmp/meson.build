@@ -8,11 +8,13 @@ headerdir = '/demonstrate_meson_openmp'
 
 # -- source files (demo library with cpp source) --
 sources = [
-  'openmp_demo.cpp'
+  'openmp_demo_lib.cpp'
 ]
 
 headers = [
-  'openmp_demo.hpp'
+  'openmp_compare_thread_count.hpp',
+  'openmp_openmp_defined.hpp',
+  'openmp_try_parallel_pragma.hpp'
 ]
 
 
@@ -23,6 +25,7 @@ demolib_lib = library(
   dependencies : [
     openmp
   ],
+  cpp_shared_args: ['-DDEMOLIB_DLL'],
   install : true
   )
 

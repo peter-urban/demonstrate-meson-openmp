@@ -5,7 +5,9 @@
 #include <catch2/catch_approx.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include <demonstrate_meson_openmp/openmp_demo.hpp>
+#include <demonstrate_meson_openmp/openmp_compare_thread_count.hpp>
+#include <demonstrate_meson_openmp/openmp_openmp_defined.hpp>
+#include <demonstrate_meson_openmp/openmp_try_parallel_pragma.hpp>
 
 // using namespace testing;
 using namespace std;

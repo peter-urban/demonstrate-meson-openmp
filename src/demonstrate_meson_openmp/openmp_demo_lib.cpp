@@ -2,7 +2,9 @@
 
 // SPDX-License-Identifier: CC0-1.0
 
-#include "openmp_demo.hpp"
+#include "openmp_compare_thread_count.hpp"
+#include "openmp_openmp_defined.hpp"
+#include "openmp_try_parallel_pragma.hpp"
 
 namespace demonstrate_meson_openmp {
 

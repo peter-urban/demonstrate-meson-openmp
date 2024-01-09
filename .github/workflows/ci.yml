@@ -21,7 +21,7 @@ concurrency:
   
 jobs:
   linux:
-    name: ci on ${{matrix.container}} (${{matrix.library_type}})
+    name: ci on ${{matrix.container}} (gcc) (${{matrix.library_type}})
     strategy:
       fail-fast: false
       matrix:
@@ -65,7 +65,7 @@ jobs:
     
 
   build-on-windows:
-    name: ci on windows
+    name: ci on windows (clang-cl) (${{matrix.library_type}}
     strategy:
       fail-fast: false
       matrix:
@@ -133,7 +133,7 @@ jobs:
 
 
   macos:
-    name: ci on macOS
+    name: ci on macOS (clang) (${{matrix.library_type}})
     runs-on: macos-latest
     strategy:
       fail-fast: false
