@@ -15,7 +15,8 @@ namespace demonstrate_meson_openmp {
 
 /**
  * @brief This function checks if the openmp processor count is the same as the
- * std::thread::hardware_concurrency() count.
+ * std::thread::hardware_concurrency() count and if omp_get_num_threads() is the
+ * same as omp_get_max_threads().
  *
  * https://stackoverflow.com/questions/10481623/how-to-tell-if-openmp-is-working
  *

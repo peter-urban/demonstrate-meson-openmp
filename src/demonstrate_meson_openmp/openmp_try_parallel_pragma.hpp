@@ -15,6 +15,12 @@
 
 namespace demonstrate_meson_openmp {
 
+/**
+ * @brief This function checks if the openmp parallel pragma is working.
+ * A parallel loop is executed and each thread writes '1' to a vector (size == number of elements) and waits 100ms.
+ * 
+ * If all elements of the vector are set to one, the test is successful.
+ */
 inline bool openmp_parallel_pragma_is_working_in_header() {
   const int omp_max_threads = omp_get_max_threads();
 
