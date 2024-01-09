@@ -23,13 +23,30 @@ namespace demonstrate_meson_openmp {
  * @return false
  */
 inline bool openmp_thread_count_is_same_as_std_thread_count_in_header() {
-  const unsigned int processor_count = std::thread::hardware_concurrency();
-  const unsigned int omp_processor_count = omp_get_num_procs();
-  const unsigned int omp_max_threads = omp_get_max_threads();
+  const int processor_count = std::thread::hardware_concurrency();
+  const int omp_processor_count = omp_get_num_procs();
+  const int omp_max_threads = omp_get_max_threads();
 
   // test does not make sense if there is only one thread
   if (processor_count < 2) {
     std::cerr << "processor_count is less than 2" << std::endl;
+    return false;
+  }
+
+  bool thread_test = true;
+#pragma omp parallel
+  {
+#pragma omp master
+    {
+      if (omp_get_num_threads() != omp_max_threads) {
+        std::cerr << "Failure omp_get_num_threads [" << omp_get_num_threads()
+                  << "] != omp_max_threads [" << omp_max_threads << "]"
+                  << std::endl;
+        thread_test = false;
+      }
+    }
+  }
+  if (!thread_test) {
     return false;
   }
 
@@ -44,7 +61,6 @@ inline bool openmp_thread_count_is_same_as_std_thread_count_in_header() {
   std::cerr << "Failure: omp_max_threads: " << omp_max_threads << std::endl;
   return false;
 }
-
 
 // ----- compiled library functions -----
 DEMOLIB_API bool openmp_thread_count_is_same_as_std_thread_count_in_library();
