@@ -27,7 +27,7 @@ if meson.get_compiler('cpp').get_id() == 'clang-cl'
   libomp = meson.get_compiler('cpp').find_library('libomp')
 
   openmp = declare_dependency(
-    compile_args : ['-fopenmp'],
+    compile_args : ['-Xclang -fopenmp'],
     dependencies : [libomp]
   )
 
