@@ -43,7 +43,7 @@ jobs:
         architecture: x64
     
     # make sure meson can find msvc
-    - uses: TheMrMilchmann/setup-msvc-dev@v2
+    - uses: TheMrMilchmann/setup-msvc-dev@v3
       with:
         arch: x64
 
