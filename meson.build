@@ -15,7 +15,12 @@ project(
 )
 
 # --- dependencies ---
-demolib_compile_args = ['-Werror=unknown-pragmas']
+demolib_compile_args = []
+
+if meson.get_compiler('cpp').get_id() != 'msvc'
+  demolib_compile_args = ['-Werror=unknown-pragmas']
+  
+endif
 
 # openmp
 if meson.get_compiler('cpp').get_id() == 'clang-cl'
