@@ -16,4 +16,9 @@ bool openmp_thread_count_is_same_as_std_thread_count_in_library()
     return openmp_thread_count_is_same_as_std_thread_count_in_header();
 }
 
+bool openmp_parallel_pragma_is_working_in_library()
+{
+    return openmp_parallel_pragma_is_working_in_header();
+}
+
 } // demonstrate_meson_openmp

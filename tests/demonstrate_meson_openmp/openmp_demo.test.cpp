@@ -25,5 +25,11 @@ TEST_CASE("Test openmp based on processor count", "[demonstrate_meson_openmp]")
     REQUIRE(demonstrate_meson_openmp::openmp_thread_count_is_same_as_std_thread_count_in_library());
 }
 
+TEST_CASE("Test openmp based on thread action", "[demonstrate_meson_openmp]")
+{
+    REQUIRE(demonstrate_meson_openmp::openmp_parallel_pragma_is_working_in_header());
+    REQUIRE(demonstrate_meson_openmp::openmp_parallel_pragma_is_working_in_library());
+}
+
 
 }
