@@ -70,7 +70,7 @@ jobs:
       fail-fast: false
       matrix:
         library_type: [shared, static]
-        compiler: [clang-cl, msvc]
+        compiler: [clang-cl, msvc-14.32, msvc-14.33, msvc-14.34, msvc-14.35, msvc-14.36, msvc-14.37]
             
           
     env:
@@ -87,7 +87,7 @@ jobs:
       with:
         python-version: '3.11'
 
-    - if: matrix.compiler == 'clang-cl'
+    - if: ${{matrix.compiler}} == 'clang-cl'
       name: Set up Clang
       uses: egor-tensin/setup-clang@v1
       with:
