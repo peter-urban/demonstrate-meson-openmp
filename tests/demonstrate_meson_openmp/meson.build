@@ -5,7 +5,9 @@
 testcomponent = 'demonstrate_meson_openmp'
 
 sources = [
-    'openmp_demo.test.cpp',
+    'openmp_defined.test.cpp',
+    'openmp_parallel_pragma.test.cpp',
+    'openmp_thread_count.test.cpp',
 ]
 
 foreach source : sources

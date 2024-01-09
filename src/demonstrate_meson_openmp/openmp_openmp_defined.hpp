@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include "dllexport.hpp"
+
 namespace demonstrate_meson_openmp {
 
 /**

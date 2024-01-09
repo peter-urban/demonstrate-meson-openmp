@@ -11,6 +11,8 @@
 
 #include <omp.h>
 
+#include "dllexport.hpp"
+
 namespace demonstrate_meson_openmp {
 
 
