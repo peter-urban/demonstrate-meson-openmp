@@ -25,13 +25,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: ['ubuntu:22.04', 'ubuntu:latest']
+        container: ['ubuntu:22.04', 'ubuntu:23.10']
         library_type: ['shared', 'static']
 
         include:
           - container: 'ubuntu:22.04'
             pip_command: 'pip install meson ninja'
-          - container: 'ubuntu:latest'
+          - container: 'ubuntu:23.10'
             pip_command: 'pip install meson ninja --break-system-packages'
           
     
