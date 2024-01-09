@@ -87,8 +87,8 @@ jobs:
       with:
         python-version: '3.11'
 
-    - if: ${{matrix.compiler}} == 'clang-cl'
-      name: Set up Clang
+    - name: Set up Clang
+      if: ${{matrix.compiler}} == clang-cl
       uses: egor-tensin/setup-clang@v1
       with:
         version: latest
