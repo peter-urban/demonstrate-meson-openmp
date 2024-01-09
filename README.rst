@@ -14,7 +14,10 @@
    :target: https://github.com/peter-urban/demonstrate-meson-openmp/actions/workflows/ci-windows-clang-cl.yml
    :alt: CI Windows Clang-CL
 
-| |badge-linux-gcc| |badge-macos-clang| |badge-windows-msvc| |badge-windows-clang-cl|
+| |badge-linux-gcc| 
+| |badge-macos-clang| 
+| |badge-windows-msvc| 
+| |badge-windows-clang-cl|
 
 demonstrate-meson-openmp
 ########################
