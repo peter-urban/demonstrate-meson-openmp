@@ -23,17 +23,9 @@ if meson.get_compiler('cpp').get_id() != 'msvc'
 endif
 
 # openmp
-if meson.get_compiler('cpp').get_id() == 'clang-cl'
-  # libomp = meson.get_compiler('cpp').find_library('libomp5')
-
-  # openmp = declare_dependency(
-  #   compile_args : ['/openmp:llvm'],
-  #   dependencies : [libomp]
-  # )
-
-  openmp = dependency('openmp')
-else
-  openmp = dependency('openmp')
+openmp = dependency('openmp')
+if meson.get_compiler('cpp').get_id() == 'msvc'
+  openmp.compile_args = ['/openmp:experimental']
 endif
 
 
