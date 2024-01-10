@@ -19,8 +19,8 @@ TEST_CASE("Test openmp based on _OPENMP defined",
   REQUIRE(
       demonstrate_meson_openmp::openmp_is_defined_for_compiler_in_library());
 
-  std::cerr << "_OPENMP is defined as: " << _OPENMP << std::endl;
-  REQUIRE(false);
+  // std::cerr << "_OPENMP is defined as: " << _OPENMP << std::endl;
+  // REQUIRE(false);
 }
 
 } // namespace demonstrate_meson_openmp_tests

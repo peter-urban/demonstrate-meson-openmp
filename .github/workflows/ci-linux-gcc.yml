@@ -25,9 +25,9 @@ jobs:
 
         include:
           - container: 'ubuntu:22.04'
-            pip_command: 'pip install meson ninja'
+            pip_command: ''
           - container: 'ubuntu:23.10'
-            pip_command: 'pip install meson ninja --break-system-packages'
+            pip_command: '--break-system-packages'
           
     
     runs-on: ubuntu-latest
@@ -47,7 +47,11 @@ jobs:
       run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential pkg-config python3-pip
       
     - name: install dependencies (meson & python)
-      run: ${{matrix.pip_command}}
+      run: pip install meson ninja ${{matrix.pip_command}}
+
+    - name: install custom meson
+      run: |
+        git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install . ${{matrix.pip_command}}; meson --version
 
     - name: configure meson
       run: meson setup builddir/; meson configure builddir -Dprefix=/usr/ --default-library=${{matrix.library_type}}

@@ -49,6 +49,10 @@ jobs:
     - run: brew install coreutils llvm@16
             
     - run: pip install meson ninja
+
+    - name: install custom meson
+      run: |
+        git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install .; meson --version
     
     - name: configure meson
       run: CXX=${{ matrix.cxx_compiler }} meson setup builddir/; meson configure builddir --default-library=${{matrix.library_type}}

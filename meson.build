@@ -24,9 +24,9 @@ endif
 
 # openmp
 openmp = dependency('openmp')
-if meson.get_compiler('cpp').get_id() == 'msvc'
-  openmp.compile_args = ['/openmp:experimental']
-endif
+# if meson.get_compiler('cpp').get_id() == 'msvc'
+#   openmp.compile_args = ['/openmp:experimental']
+# endif
 
 
 # --- build targets ---
