@@ -22,6 +22,11 @@ jobs:
       fail-fast: false
       matrix:
         library_type: [shared, static]
+        cxx_compiler: ["$(brew --prefix llvm@17)/bin/clang++"]            
+    
+    # env does not work here because is resolved as string and not command 
+    # env:
+    #   CXX: ${{ matrix.cxx_compiler }}
       
     steps:
     
@@ -40,8 +45,8 @@ jobs:
       with:
         key: super-ci-mac  # name for the cache
         
-    # install clang 15
-    - run: brew install coreutils llvm@16
+    # install clang 17
+    - run: brew install coreutils llvm@17
             
     - run: pip install meson ninja
 
@@ -50,7 +55,7 @@ jobs:
         git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install .; meson --version
     
     - name: configure meson
-      run: meson setup builddir/; meson configure builddir --default-library=${{matrix.library_type}}
+      run: CXX=${{ matrix.cxx_compiler }} meson setup builddir/; meson configure builddir --default-library=${{matrix.library_type}}
 
     - name: compile project
       run: meson compile -C builddir/
