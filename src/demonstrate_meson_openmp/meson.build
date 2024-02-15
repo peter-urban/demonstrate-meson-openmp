@@ -4,7 +4,7 @@
 
 # -- library setup --
 libname   = 'demonstrate_meson_openmp'
-headerdir = '/demonstrate_meson_openmp'
+headerdir = 'demonstrate_meson_openmp'
 
 # -- source files (demo library with cpp source) --
 sources = [

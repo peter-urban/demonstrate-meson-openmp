@@ -56,9 +56,9 @@ jobs:
     - name: install dependencies (meson & python)
       run: pip install meson
 
-    - name: install custom meson
-      run: |
-        git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install .; meson --version
+    # - name: install custom meson
+    #   run: |
+    #     git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install .; meson --version
 
     - name: download ninja long path
       run : |

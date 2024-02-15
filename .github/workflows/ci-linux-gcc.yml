@@ -49,9 +49,9 @@ jobs:
     - name: install dependencies (meson & python)
       run: pip install meson ninja ${{matrix.pip_command}}
 
-    - name: install custom meson
-      run: |
-        git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install . ${{matrix.pip_command}}; meson --version
+    # - name: install custom meson
+    #   run: |
+    #     git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install . ${{matrix.pip_command}}; meson --version
 
     - name: configure meson
       run: meson setup builddir/; meson configure builddir -Dprefix=/usr/ --default-library=${{matrix.library_type}}
