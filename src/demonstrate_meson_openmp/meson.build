@@ -30,7 +30,7 @@ demolib_lib = library(
   )
 
 if get_option('default_library') == 'shared'
-    demolib_compile_args.append('-DDEMOLIB_DLL')
+    demolib_compile_args += '-DDEMOLIB_DLL'
 endif
 
 # -- internal dependency --
