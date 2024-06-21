@@ -40,19 +40,20 @@ jobs:
       with:
         architecture: x64
       
-    # - name: Set up Clang
-    #   uses: egor-tensin/setup-clang@v1
-    #   with:
-    #     version: latest
-
-    - uses: actions4cpp/setup-llvm@v1
+    - name: Set up Clang
+      uses: egor-tensin/setup-clang@v1
       with:
-        llvm-version: "17"
+        version: latest
+
+    # - uses: actions4cpp/setup-llvm@v1
+    #   with:
+    #     llvm-version: "17"
     
     # make sure meson can find msvc
     - uses: TheMrMilchmann/setup-msvc-dev@v3
       with:
         arch: x64
+        toolset: 14.39.33523
 
     - name: checkout main repository
       uses: actions/checkout@v3
