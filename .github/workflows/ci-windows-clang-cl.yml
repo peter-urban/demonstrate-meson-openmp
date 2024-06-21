@@ -16,18 +16,18 @@ on:
   
 jobs:
   windows:
-    name: windows (${{matrix.compiler}}) (${{matrix.library_type}})
+    name: ${{ matrix.os }} (${{matrix.compiler}}) (${{matrix.library_type}})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         library_type: [shared, static]
         compiler: [clang-cl]         
+        os: [windows-latest, windows-2019]
           
     env:
       CC: ${{matrix.compiler}}
       CXX: ${{matrix.compiler}}
-
-    runs-on: windows-latest
 
     steps:
     - name: setup python
