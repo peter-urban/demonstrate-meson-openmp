@@ -24,10 +24,13 @@ endif
 
 # openmp
 openmp = dependency('openmp')
-if meson.get_compiler('cpp').get_id() == 'clang'
-  openmp.compile_args = ['-fopenmp']
+if meson.get_compiler('cpp').get_id() == 'clang-cl'
+  openmp = declare_dependency(
+    compile_args: ['-fopenmp'],
+    link_args: ['-fopenmp']
+  )
 endif
-
+message('CLANG ID: ' + meson.get_compiler('cpp').get_id())
 
 # --- build targets ---
 
