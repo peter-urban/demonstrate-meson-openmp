@@ -17,12 +17,13 @@ on:
 jobs:
   macos:
     name: ci on macOS (clang) (${{matrix.library_type}})
-    runs-on: macos-13
+    runs-on: matrix.os
     strategy:
       fail-fast: false
       matrix:
         library_type: [shared, static]
-        cxx_compiler: ["$(brew --prefix llvm@17)/bin/clang++"]            
+        cxx_compiler: ["$(brew --prefix llvm@18)/bin/clang++"]            
+        matrix.os: [macos-14, macos-12]
     
     # env does not work here because is resolved as string and not command 
     # env:
@@ -45,8 +46,11 @@ jobs:
       with:
         key: super-ci-mac  # name for the cache
         
-    # install clang 17
-    - run: brew install coreutils llvm@17
+    # install clang 18
+    - run: brew install coreutils llvm@18
+
+    # install libomp
+    - run: brew install libomp
             
     - run: pip install meson ninja
 
