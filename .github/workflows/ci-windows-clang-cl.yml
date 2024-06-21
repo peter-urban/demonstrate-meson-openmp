@@ -16,7 +16,7 @@ on:
   
 jobs:
   windows:
-    name: ci on windows (${{matrix.compiler}}) (${{matrix.library_type}})
+    name: windows (${{matrix.compiler}}) (${{matrix.library_type}})
     strategy:
       fail-fast: false
       matrix:
@@ -26,8 +26,6 @@ jobs:
     env:
       CC: ${{matrix.compiler}}
       CXX: ${{matrix.compiler}}
-      #this is where we will download ninja later
-      NINJA: d:/ninja.exe
 
     runs-on: windows-latest
 

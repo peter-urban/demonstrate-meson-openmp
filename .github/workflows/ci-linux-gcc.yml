@@ -16,7 +16,7 @@ on:
   
 jobs:
   linux:
-    name: ci on ${{matrix.container}} (gcc) (${{matrix.library_type}})
+    name: ${{matrix.container}} (gcc) (${{matrix.library_type}})
     strategy:
       fail-fast: false
       matrix:

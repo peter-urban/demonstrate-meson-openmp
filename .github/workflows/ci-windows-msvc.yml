@@ -26,9 +26,6 @@ jobs:
     env:
       #CC: ${{matrix.compiler}}
       #CXX: ${{matrix.compiler}}
-      #this is where we will download ninja later
-      NINJA: d:/ninja.exe
-
     runs-on: windows-latest
 
     steps:
