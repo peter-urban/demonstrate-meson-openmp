@@ -11,7 +11,7 @@ project(
 
   version: '1.0.0',
   default_options: ['warning_level=2', 'buildtype=release', 'cpp_std=c++20'],
-  meson_version: '>=1.3.2' #first version with clang-cl openmp support
+  meson_version: '>=1.4' #latest tested version
 )
 
 # --- dependencies ---
