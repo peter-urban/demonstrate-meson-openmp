@@ -59,20 +59,15 @@ jobs:
         lfs: false
 
     - name: install dependencies (meson & python)
-      run: pip install meson
+      run: pip install meson ninja
 
     # - name: install custom meson
     #   run: |
     #     git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install .; meson --version
 
-    - name: download ninja long path
-      run : |
-        Invoke-WebRequest -Uri https://raw.githubusercontent.com/themachinethatgoesping/tools/main/ninja-windows/ninja.exe -OutFile d:\ninja.exe
-
-    - name: check ninja executable path
+    - name: check ninja version
       run: |
-        $env:NINJA
-        d:\ninja.exe --version
+        ninja --version
 
     - name: configure meson
       run: meson setup builddir/; meson configure builddir -Dprefix=/usr/ --default-library=${{matrix.library_type}}
@@ -81,7 +76,5 @@ jobs:
       run: meson compile -C builddir/
 
     - name: test (cpp)
-      #run: meson test -C builddir/ --print-errorlogs 
-      # meson test does not work with the custom ninja executable
-      run: ninja test -C builddir/ --verbose
+      run: meson test -C builddir/ --print-errorlogs 
 
