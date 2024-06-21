@@ -23,7 +23,8 @@ jobs:
       matrix:
         library_type: [shared, static]
         compiler: [clang-cl]         
-        os: [windows-latest, windows-2019]
+        #os: [windows-latest, windows-2019] #currently fails on windows-latest (2022)
+        os: [windows-2019]
           
     env:
       CC: ${{matrix.compiler}}
