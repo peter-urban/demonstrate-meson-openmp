@@ -23,9 +23,10 @@ jobs:
         library_type: [shared, static]
         compiler: [msvc]           
           
-    env:
+    #env:
       #CC: ${{matrix.compiler}}
       #CXX: ${{matrix.compiler}}
+
     runs-on: windows-latest
 
     steps:
