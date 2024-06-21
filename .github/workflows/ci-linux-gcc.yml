@@ -20,13 +20,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: ['ubuntu:22.04', 'ubuntu:23.10']
+        container: ['ubuntu:22.04', 'ubuntu:24.04']
         library_type: ['shared', 'static']
 
         include:
           - container: 'ubuntu:22.04'
             pip_command: ''
-          - container: 'ubuntu:23.10'
+          - container: 'ubuntu:24.04'
             pip_command: '--break-system-packages'
           
     
