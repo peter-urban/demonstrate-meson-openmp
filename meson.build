@@ -25,8 +25,7 @@ endif
 openmp = dependency('openmp')
 if meson.get_compiler('cpp').get_id() == 'clang-cl'
   openmp = declare_dependency(
-    compile_args: ['-openmp'],
-    link_args: ['-openmp']
+    compile_args: ['\openmp:experimental'],
   )
 endif
 message('CLANG ID: ' + meson.get_compiler('cpp').get_id())
