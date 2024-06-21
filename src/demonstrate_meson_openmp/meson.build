@@ -25,10 +25,13 @@ demolib_lib = library(
   dependencies : [
     openmp
   ],
-  cpp_shared_args: ['-DDEMOLIB_DLL'],
+  cpp_shared_args: ['-DDEMOLIB_DLL', '-DDEMOLIB_DLL_EXPORTS'],
   install : true
   )
 
+if get_option('default_library') == 'shared'
+    demolib_compile_args.append('-DDEMOLIB_DLL')
+endif
 
 # -- internal dependency --
 demolib_dep = declare_dependency(

@@ -18,16 +18,15 @@ project(
 demolib_compile_args = []
 
 if meson.get_compiler('cpp').get_id() != 'msvc'
-  demolib_compile_args = ['-Werror=unknown-pragmas']
-  
+  demolib_compile_args = ['-Werror=unknown-pragmas']  
 endif
 
 # openmp
 openmp = dependency('openmp')
 if meson.get_compiler('cpp').get_id() == 'clang-cl'
   openmp = declare_dependency(
-    compile_args: ['-fopenmp'],
-    link_args: ['-fopenmp']
+    compile_args: ['-openmp'],
+    link_args: ['-openmp']
   )
 endif
 message('CLANG ID: ' + meson.get_compiler('cpp').get_id())
