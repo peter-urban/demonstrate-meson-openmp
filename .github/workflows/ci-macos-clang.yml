@@ -55,8 +55,7 @@ jobs:
     - run: pip install meson ninja
 
     - name: configure meson
-      run: |
-        meson setup builddir -Dpython.install_env=auto
+      run: CXX=${{ matrix.cxx_compiler }} meson setup builddir/ --default-library=${{matrix.library_type}}
 
     - name: compile project
       run: meson compile -C builddir/
