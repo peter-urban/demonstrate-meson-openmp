@@ -16,18 +16,14 @@ on:
   
 jobs:
   macos:
-    name: ${{ matrix.os }} (clang) (${{matrix.library_type}})
+    name: ${{ matrix.os }} (${{ matrix.llvm }}) (${{matrix.library_type}})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         library_type: [shared, static]
-        cxx_compiler: ["$(brew --prefix llvm@18)/bin/clang++"]            
+        llvm: [llvm@18, llvm@19]            
         os: [macos-15]
-    
-    # env does not work here because is resolved as string and not command 
-    # env:
-    #   CXX: ${{ matrix.cxx_compiler }}
       
     steps:
     
@@ -47,7 +43,7 @@ jobs:
         key: super-ci-mac  # name for the cache
         
     # install clang 18
-    - run: brew install coreutils llvm@18
+    - run: brew install coreutils ${{ matrix.llvm }}
 
     # install libomp
     - run: brew install libomp
@@ -56,7 +52,7 @@ jobs:
 
     - name: configure meson
       run: |
-        CXX=${{ matrix.cxx_compiler }} \
+        CXX=$(brew --prefix ${{ matrix.llvm }})/bin/clang++  \
         LDFLAGS="-L/opt/homebrew/opt/libomp/lib" \
         CPPFLAGS="-I/opt/homebrew/opt/libomp/include" \
         meson setup builddir/ --default-library=${{matrix.library_type}}
