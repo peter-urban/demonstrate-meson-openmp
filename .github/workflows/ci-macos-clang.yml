@@ -42,7 +42,7 @@ jobs:
       with:
         key: super-ci-mac  # name for the cache
         
-    # install clang 18
+    # install clang
     - run: brew install coreutils ${{ matrix.llvm }}
 
     # install libomp
