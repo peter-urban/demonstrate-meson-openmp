@@ -23,7 +23,7 @@ jobs:
       matrix:
         library_type: [shared, static]
         cxx_compiler: ["$(brew --prefix llvm@18)/bin/clang++"]            
-        os: [macos-14, macos-12]
+        os: [macos-15]
     
     # env does not work here because is resolved as string and not command 
     # env:
@@ -33,7 +33,7 @@ jobs:
     
     - uses: actions/setup-python@v3
       with:
-        python-version: '3.11'
+        python-version: '3.12'
         
     - name: checkout main repository
       uses: actions/checkout@v3
@@ -54,12 +54,9 @@ jobs:
             
     - run: pip install meson ninja
 
-    # - name: install custom meson
-    #   run: |
-    #     git clone https://github.com/peter-urban/meson.git; cd meson; git checkout fix-openmp-dependency-for-clang-cl; pip install .; meson --version
-    
     - name: configure meson
-      run: CXX=${{ matrix.cxx_compiler }} meson setup builddir/; meson configure builddir --default-library=${{matrix.library_type}}
+      run: |
+        meson setup builddir -Dpython.install_env=auto
 
     - name: compile project
       run: meson compile -C builddir/
